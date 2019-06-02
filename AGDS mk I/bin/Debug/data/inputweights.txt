@@ -1,0 +1,3 @@
+member,0.25
+coordinator,0.15
+leader,0.30

@@ -1,18 +1,13 @@
-﻿using DotNetGraph;
-using QuickGraph;
-using QuickGraph.Graphviz;
-using QuickGraph.Graphviz.Dot;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AGDS_mk_I
 {
+    [Serializable]
     class MAGDS
     {
         public List<Entity> entities;

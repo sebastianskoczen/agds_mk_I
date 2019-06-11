@@ -7,6 +7,7 @@ using System.Globalization;
 
 namespace AGDS_mk_I
 {
+    [Serializable]
     class AGDS
     {
         public string name;
@@ -20,6 +21,16 @@ namespace AGDS_mk_I
             attributes = new List<Attribute>();
             values = new List<Value>();
             entities = new List<Entity>();
+        }
+
+        internal List<Tuple<Entity,Entity,double>> CalculateSimilarities(Entity entity)
+        {
+            List<Tuple<Entity, Entity, double>> results = new List<Tuple<Entity, Entity, double>>();
+            foreach(Entity e in entities)
+            {
+                results.Add(new Tuple<Entity,Entity,double>(entity, e, entity.NumericallySimilarTo(e)));
+            }
+            return results;
         }
 
         public AGDS(string inname, ref List<Entity> inentity)
@@ -76,7 +87,7 @@ namespace AGDS_mk_I
                 discovery = e2Features.Find(x => x.Item1.name == t.Item1.name);
                 if(discovery != null)
                 {
-                    if (Double.TryParse(discovery.Item2.value, NumberStyles.AllowDecimalPoint, NumberFormatInfo.InvariantInfo, out number)) //double.TryParse(discovery.Item2.value, out number));
+                    if (Double.TryParse(discovery.Item2.value, NumberStyles.AllowDecimalPoint, NumberFormatInfo.InvariantInfo, out number))
                     {
                         min = Double.PositiveInfinity;
                         max = Double.NegativeInfinity;
